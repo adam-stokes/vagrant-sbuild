@@ -1,9 +1,7 @@
+include stdlib
 class sbuild::install{
-    package{
-      "sbuild": ensure => present,
-      "debhelper": ensure => present,
-      "ubuntu-dev-tools": ensure => present
-    }
+    $commonpkgs = [ "sbuild", "debhelper", "ubuntu-dev-tools" ]
+    package{ $commonpkgs: ensure => "installed" }
 
     exec { "adduser":
       command => "adduser vagrant sbuild",
@@ -11,8 +9,8 @@ class sbuild::install{
     }
 
     file_line { 'schroot_mount':
-      path => '/etc/schroot/sbuild/fstab'
-      line => '/home/vagrant/ubuntu/scratch  /scratch          none  rw,bind  0  0'
+      path => '/etc/schroot/sbuild/fstab',
+      line => '/home/vagrant/ubuntu/scratch  /scratch          none  rw,bind  0  0',
     }
 
     file {
@@ -31,7 +29,7 @@ class sbuild::install{
       group => 'vagrant',
       ensure => file,
       mode => 644,
-      source => '/vagrant/files/mk-sbuild.rc'
+      source => '/vagrant/files/mk-sbuild.rc',
       require => Package["sbuild"],
     }
 
