@@ -25,5 +25,14 @@ $purge_build_deps = 'successful';
 # Directory for writing build logs to
 $log_dir="/home/vagrant/ubuntu/logs";
 
+$external_commands = {
+    "pre-build-commands" => [
+        ['/home/vagrant/ubuntu/repo/scan.sh'],
+    ],
+    "chroot-setup-commands" => [
+        ['/home/vagrant/ubuntu/repo/prep.sh'],
+    ],
+};
+
 # don't remove this, Perl needs it:
 1;
