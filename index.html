@@ -52,6 +52,13 @@
 <p>spinup quick sbuild environments with additional support for custom apt repositories</p>
 
 <h2>
+<a name="features" class="anchor" href="#features"><span class="octicon octicon-link"></span></a>features</h2>
+
+<ul>
+<li>apt package caching for quicker builds</li>
+<li>automatically set maxcpus available to sbuild</li>
+<li>supports building packages against newer/custom local packages</li>
+</ul><h2>
 <a name="setup" class="anchor" href="#setup"><span class="octicon octicon-link"></span></a>setup</h2>
 
 <ul>
@@ -65,6 +72,14 @@
 <li>Install <a href="https://github.com/dotless-de/vagrant-vbguest">vagrant-vbguest</a>
 </li>
 </ul><pre><code>$ vagrant plugin install vagrant-vbguest
+</code></pre>
+
+<ul>
+<li>Install vagrant-sbuild</li>
+</ul><pre><code>$ git clone git://github.com:battlemidget/vagrant-sbuild.git
+$ cd vagrant-sbuild
+$ git submodule init
+$ git submodule update
 </code></pre>
 
 <ul>
@@ -82,22 +97,20 @@ export DEBSIGN_KEY=123134
 <h2>
 <a name="create-sbuild-environments" class="anchor" href="#create-sbuild-environments"><span class="octicon octicon-link"></span></a>create sbuild environments</h2>
 
-<pre><code>$ vagrant ssh -- mk-sbuild saucy
+<pre><code>$ vagrant mk-sbuild --series saucy
 </code></pre>
 
 <h2>
 <a name="perform-builds" class="anchor" href="#perform-builds"><span class="octicon octicon-link"></span></a>perform builds</h2>
 
-<pre><code>$ vagrant ssh
-$ cd path/to/**.dsc
-$ sbuild -d saucy-amd64 -j4
+<pre><code>$ vagrant sbuild --project saucy-amd64 --dsc scratch/PACKAGE*.dsc
 </code></pre>
 
 <h2>
 <a name="additional" class="anchor" href="#additional"><span class="octicon octicon-link"></span></a>additional</h2>
 
-<p>Custom packages can be placed in <strong>/home/vagrant/ubuntu/repo</strong> on the vagrant
-guest.</p>
+<p>If packages are required that are not in the archive you may place them in
+the <strong>repo</strong> directory and they will be included in any future builds.</p>
 
 <h3>
 <a name="reference" class="anchor" href="#reference"><span class="octicon octicon-link"></span></a>reference</h3>
@@ -111,6 +124,7 @@ for additional information [[on]] local packages.</p>
 <ul>
 <li>setup vagrant multi-machine for each series</li>
 <li>include a config.yaml file for setting your debian maintainer info.</li>
+<li>extend vagrant commands to include mk-sbuild.</li>
 </ul>
       </section>
 
