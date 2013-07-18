@@ -1,11 +1,26 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+include stdlib
+
 exec { "apt_update":
-  command => "apt-get update",
+  command => "apt-get -ym -qq update",
   path    => "/usr/bin"
 }
 
-#  class{'git::install':}
-#  class{'apache2::install':}
-#  class{'php5::install':}
-#  class{'mysql::install':}
-#  class{'wordpress::install':}
+$commonpkgs = [ "sbuild", "debhelper", "ubuntu-dev-tools",
+                "rng-tools", "moreutils", "bzr" ]
+
+package{ 
+  $commonpkgs: ensure => "installed" 
+}
+
+exec {
+  "usermod":
+  command => "/usr/sbin/usermod -a -G sbuild vagrant",
+  subscribe => [ Package["sbuild"] ],
+}
+
+class{'bzr::install':}
+class{'rng::install':}
 class{'sbuild::install':}

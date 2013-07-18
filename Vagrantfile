@@ -1,7 +1,7 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-Vagrant::Config.run do |config|
+Vagrant.configure("2") do |config|
   # All Vagrant configuration is done here. The most common configuration
   # options are documented and commented below. For a complete reference,
   # please see the online documentation at vagrantup.com.
@@ -64,6 +64,10 @@ Vagrant::Config.run do |config|
     puppet.manifests_path = "puppet/manifests"
     puppet.module_path = "puppet/modules"
     puppet.manifest_file  = "init.pp"
-    # puppet.options="--debug"
+    puppet.options="--debug"
+    puppet.facter = {
+      "debemail" => ENV['DEBEMAIL'] || "Rod Piper <wwf@4life.com>",
+      "debsign_key" => ENV['DEBSIGN_KEYID'] || "123456",
+    }
    end
 end
