@@ -48,5 +48,10 @@ for additional information on local packages.
 + setup vagrant multi-machine for each series
 + include a config.yaml file for setting your debian maintainer info.
 
-[SbuildSimple]: https://wiki.ubuntu.com/SimpleSbuild
+## tips
 
++ If you get that error message about guest additions out of date yada yada
+install the [vagrant-vbguest][] plugin.
+
+[SbuildSimple]: https://wiki.ubuntu.com/SimpleSbuild
+[vagrant-vbguest]: https://github.com/dotless-de/vagrant-vbguest
