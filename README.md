@@ -6,19 +6,24 @@ spinup quick sbuild environments with additional support for custom apt reposito
 ## setup
 
 + Install virtualbox
-  ```
-  $ sudo apt-get install virtualbox
-  ```
+
+```
+$ sudo apt-get install virtualbox
+```
+
 + Install [vagrant][]
 + Install [vagrant-vbguest][]
-  ```
-  $ vagrant plugin install vagrant-vbguest
-  ```
+ 
+```
+$ vagrant plugin install vagrant-vbguest
+```
+
 + Set some environment variables
-  ```
-  export DEBEMAIL=Your Name <hi2u@mail.com>
-  export DEBSIGN_KEY=123134
-  ```
+
+```
+export DEBEMAIL=Your Name <hi2u@mail.com>
+export DEBSIGN_KEY=123134
+```
 
 ## usage
 
@@ -47,7 +52,7 @@ Custom packages can be placed in /home/vagrant/ubuntu/repo
 ### reference
 
 This vagrant project was modeled after [SbuildSimple][]. Please check there
-for additional information on local packages.
+for additional information [[on]] local packages.
 
 ## todo
 
