@@ -1,9 +1,6 @@
 [submodule "puppet/modules/stdlib"]
 	path = puppet/modules/stdlib
 	url = https://github.com/puppetlabs/puppetlabs-stdlib.git
-[submodule "puppet/modules/common"]
-	path = puppet/modules/common
-	url = git@github.com:camptocamp/puppet-common.git
 [submodule "puppet/modules/vcsrepo"]
 	path = puppet/modules/vcsrepo
 	url = git@github.com:battlemidget/puppetlabs-vcsrepo.git

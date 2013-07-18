@@ -18,12 +18,6 @@ $ sudo apt-get install virtualbox
 ```
 
 + Install [vagrant][]
-+ Install [vagrant-vbguest][]
- 
-```
-$ vagrant plugin install vagrant-vbguest
-```
-
 + Install vagrant-sbuild
 
 ```
@@ -31,6 +25,12 @@ $ git clone git://github.com:battlemidget/vagrant-sbuild.git
 $ cd vagrant-sbuild
 $ git submodule init
 $ git submodule update
+```
+
++ Install [vagrant-vbguest][]
+ 
+```
+$ vagrant plugin install vagrant-vbguest
 ```
 
 + Set some environment variables
@@ -72,7 +72,7 @@ for additional information [[on]] local packages.
 
 + setup vagrant multi-machine for each series
 + include a config.yaml file for setting your debian maintainer info.
-+ extend vagrant commands to include mk-sbuild.
++ make use of lxc provider
 
 [SbuildSimple]: https://wiki.ubuntu.com/SimpleSbuild
 [vagrant]: http://downloads.vagrantup.com/
