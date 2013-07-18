@@ -13,6 +13,11 @@ exec { "apt_purge":
   path => "/usr/bin",
 }
 
+# exec { "apt_dist_upgrade":
+#  command => "apt-get -ym -qq dist-upgrade",
+#  path => "/usr/bin",
+# }
+
 $commonpkgs = [ "sbuild", "debhelper", "ubuntu-dev-tools",
                 "rng-tools", "moreutils", "bzr", "apt-cacher-ng" ]
 
