@@ -20,4 +20,8 @@ logs/*
 scratch/*
 !scratch/.gitkeep
 repo/*
-!repo/.gitkeep
+!repo/chup
+!repo/clean.sh
+!repo/prep.sh
+!repo/scan.sh
+!repo/sbuildrc.ex
