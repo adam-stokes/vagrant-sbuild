@@ -47,7 +47,8 @@ $ sbuild -d saucy-amd64 -j4
 
 ## additional
 
-Custom packages can be placed in /home/vagrant/ubuntu/repo
+Custom packages can be placed in **/home/vagrant/ubuntu/repo** on the vagrant
+guest.
 
 ### reference
 
