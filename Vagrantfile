@@ -1,7 +1,23 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
+# Addresses issue of ubuntu cloud images having older guestadditions
+# https://github.com/dotless-de/vagrant-vbguest/issues/64#issuecomment-17214061
+class CloudUbuntuVagrant < VagrantVbguest::Installers::Ubuntu
+  def install(opts=nil, &block)
+    communicate.sudo("apt-get -y -q purge virtualbox-guest-dkms virtualbox-guest-utils virtualbox-guest-x11", opts, &block)
+    @vb_uninstalled = true
+    super
+  end
+
+  def running?(opts=nil, &block)
+    return false if @vb_uninstalled
+    super
+  end
+end
+
 Vagrant.configure("2") do |config|
+  config.vbguest.installer = CloudUbuntuVagrant
   # Every Vagrant virtual environment requires a box to build off of.
   config.vm.box = "precise64"
   config.vm.box_url = "http://goo.gl/xZ19a"
@@ -18,7 +34,7 @@ Vagrant.configure("2") do |config|
     puppet.manifests_path = "puppet/manifests"
     puppet.module_path = "puppet/modules"
     puppet.manifest_file  = "init.pp"
-    puppet.options="--debug"
+    # puppet.options="--verbose --debug"
     puppet.facter = {
       "debemail" => ENV['DEBEMAIL'] || "Rod Piper <wwf@4life.com>",
       "debsign_key" => ENV['DEBSIGN_KEYID'] || "123456",

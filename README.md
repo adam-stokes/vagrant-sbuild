@@ -6,13 +6,19 @@ spinup quick sbuild environments with additional support for custom apt reposito
 ## setup
 
 + Install virtualbox
-+ Install vagrant
+  ```
+  $ sudo apt-get install virtualbox
+  ```
++ Install [vagrant][]
++ Install [vagrant-vbguest][]
+  ```
+  $ vagrant plugin install vagrant-vbguest
+  ```
 + Set some environment variables
-
-```
-export DEBEMAIL=Your Name <hi2u@mail.com>
-export DEBSIGN_KEY=123134
-```
+  ```
+  export DEBEMAIL=Your Name <hi2u@mail.com>
+  export DEBSIGN_KEY=123134
+  ```
 
 ## usage
 
@@ -48,10 +54,6 @@ for additional information on local packages.
 + setup vagrant multi-machine for each series
 + include a config.yaml file for setting your debian maintainer info.
 
-## tips
-
-+ If you get that error message about guest additions out of date yada yada
-install the [vagrant-vbguest][] plugin.
-
 [SbuildSimple]: https://wiki.ubuntu.com/SimpleSbuild
+[vagrant]: http://downloads.vagrantup.com/
 [vagrant-vbguest]: https://github.com/dotless-de/vagrant-vbguest
