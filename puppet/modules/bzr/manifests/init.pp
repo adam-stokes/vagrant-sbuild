@@ -25,7 +25,8 @@ class bzr::install {
     vcsrepo { "/home/vagrant/ubuntu/repo":
       ensure   => present,
       provider => bzr,
-      source   => 'lp:~barry/+junk/repotools',
+      source   => 'lp:~debugmonkeys/+junk/repotools',
       subscribe => [ Package["bzr"], File['/home/vagrant/ubuntu'] ],
     }
+
 }

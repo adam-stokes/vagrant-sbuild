@@ -1,0 +1,11 @@
+# Do whatever the default script would do
+. /etc/schroot/default/config
+
+# Clean up during 00check
+if [ "x$0" = "x/etc/schroot/setup.d/00check" ]; then
+    if [ $1 = "setup-stop" ]; then
+        # Pull out .ddebs
+        mv /var/cache/buildtmp/schroot/union/overlay/"$SESSION_ID"/build/*/*.ddeb /scratch/ddebs/ 2>/dev/null || true
+    fi
+fi
+# end script

@@ -8,11 +8,16 @@ exec { "apt_update":
   path    => "/usr/bin"
 }
 
-$commonpkgs = [ "sbuild", "debhelper", "ubuntu-dev-tools",
-                "rng-tools", "moreutils", "bzr" ]
+exec { "apt_purge":
+  command => "apt-get -y -q purge virtualbox-guest-dkms virtualbox-guest-utils virtualbox-guest-x11",
+  path => "/usr/bin",
+}
 
-package{ 
-  $commonpkgs: ensure => "installed" 
+$commonpkgs = [ "sbuild", "debhelper", "ubuntu-dev-tools",
+                "rng-tools", "moreutils", "bzr", "apt-cacher-ng" ]
+
+package{
+  $commonpkgs: ensure => "installed"
 }
 
 exec {

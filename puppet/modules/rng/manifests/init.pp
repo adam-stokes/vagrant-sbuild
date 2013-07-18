@@ -1,3 +1,6 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
 # rng-tools for entropy when generating keys
 class rng::install {
     file {
