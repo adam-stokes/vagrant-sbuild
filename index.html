@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=640" />
+
+    <link rel="stylesheet" href="stylesheets/core.css" media="screen"/>
+    <link rel="stylesheet" href="stylesheets/mobile.css" media="handheld, only screen and (max-device-width:640px)"/>
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css"/>
+
+    <script type="text/javascript" src="javascripts/modernizr.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script type="text/javascript" src="javascripts/headsmart.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function () {
+        $('#main_content').headsmart()
+      })
+    </script>
+    <title>Vagrant-sbuild by battlemidget</title>
+  </head>
+
+  <body>
+    <a id="forkme_banner" href="https://github.com/battlemidget/vagrant-sbuild">View on GitHub</a>
+    <div class="shell">
+
+      <header>
+        <span class="ribbon-outer">
+          <span class="ribbon-inner">
+            <h1>Vagrant-sbuild</h1>
+            <h2>spinup quick sbuild environments with additional support for custom apt repositories</h2>
+          </span>
+          <span class="left-tail"></span>
+          <span class="right-tail"></span>
+        </span>
+      </header>
+
+      <section id="downloads">
+        <span class="inner">
+          <a href="https://github.com/battlemidget/vagrant-sbuild/zipball/master" class="zip"><em>download</em> .ZIP</a><a href="https://github.com/battlemidget/vagrant-sbuild/tarball/master" class="tgz"><em>download</em> .TGZ</a>
+        </span>
+      </section>
+
+
+      <span class="banner-fix"></span>
+
+
+      <section id="main_content">
+        <h1>
+<a name="vagrant-sbuild" class="anchor" href="#vagrant-sbuild"><span class="octicon octicon-link"></span></a>vagrant-sbuild</h1>
+
+<p>spinup quick sbuild environments with additional support for custom apt repositories</p>
+
+<h2>
+<a name="setup" class="anchor" href="#setup"><span class="octicon octicon-link"></span></a>setup</h2>
+
+<ul>
+<li>Install virtualbox</li>
+</ul><pre><code>$ sudo apt-get install virtualbox
+</code></pre>
+
+<ul>
+<li>Install <a href="http://downloads.vagrantup.com/">vagrant</a>
+</li>
+<li>Install <a href="https://github.com/dotless-de/vagrant-vbguest">vagrant-vbguest</a>
+</li>
+</ul><pre><code>$ vagrant plugin install vagrant-vbguest
+</code></pre>
+
+<ul>
+<li>Set some environment variables</li>
+</ul><pre><code>export DEBEMAIL=Your Name &lt;hi2u@mail.com&gt;
+export DEBSIGN_KEY=123134
+</code></pre>
+
+<h2>
+<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>usage</h2>
+
+<pre><code>$ vagrant up
+</code></pre>
+
+<h2>
+<a name="create-sbuild-environments" class="anchor" href="#create-sbuild-environments"><span class="octicon octicon-link"></span></a>create sbuild environments</h2>
+
+<pre><code>$ vagrant ssh -- mk-sbuild saucy
+</code></pre>
+
+<h2>
+<a name="perform-builds" class="anchor" href="#perform-builds"><span class="octicon octicon-link"></span></a>perform builds</h2>
+
+<pre><code>$ vagrant ssh
+$ cd path/to/**.dsc
+$ sbuild -d saucy-amd64 -j4
+</code></pre>
+
+<h2>
+<a name="additional" class="anchor" href="#additional"><span class="octicon octicon-link"></span></a>additional</h2>
+
+<p>Custom packages can be placed in <strong>/home/vagrant/ubuntu/repo</strong> on the vagrant
+guest.</p>
+
+<h3>
+<a name="reference" class="anchor" href="#reference"><span class="octicon octicon-link"></span></a>reference</h3>
+
+<p>This vagrant project was modeled after <a href="https://wiki.ubuntu.com/SimpleSbuild">SbuildSimple</a>. Please check there
+for additional information [[on]] local packages.</p>
+
+<h2>
+<a name="todo" class="anchor" href="#todo"><span class="octicon octicon-link"></span></a>todo</h2>
+
+<ul>
+<li>setup vagrant multi-machine for each series</li>
+<li>include a config.yaml file for setting your debian maintainer info.</li>
+</ul>
+      </section>
+
+      <footer>
+        <span class="ribbon-outer">
+          <span class="ribbon-inner">
+            <p>this project by <a href="https://github.com/battlemidget">battlemidget</a> can be found on <a href="https://github.com/battlemidget/vagrant-sbuild">GitHub</a></p>
+          </span>
+          <span class="left-tail"></span>
+          <span class="right-tail"></span>
+        </span>
+        <p>Generated with <a href="http://pages.github.com">GitHub Pages</a> using Merlot</p>
+        <span class="octocat"></span>
+      </footer>
+
+    </div>
+
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-42527370-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+  </body>
+</html>
