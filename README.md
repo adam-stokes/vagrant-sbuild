@@ -3,13 +3,14 @@ vagrant-sbuild
 
 spinup quick sbuild environments with additional support for custom apt repositories
 
-## features
+## Features
 
++ supports virtualbox and **lxc**
 + apt package caching for quicker builds
-+ automatically set maxcpus available to sbuild
++ automatically set maxcpus available(virtualbox) to sbuild
 + supports building packages against newer/custom local packages
 
-## setup
+## Setup
 
 + Install virtualbox
 
@@ -27,10 +28,10 @@ $ git submodule init
 $ git submodule update
 ```
 
-+ Install [vagrant-vbguest][]
++ Install [vagrant-lxc][]
  
 ```
-$ vagrant plugin install vagrant-vbguest
+$ vagrant plugin install vagrant-lxc
 ```
 
 + Set some environment variables
@@ -40,40 +41,52 @@ export DEBEMAIL=Your Name <hi2u@mail.com>
 export DEBSIGN_KEY=123134
 ```
 
-## usage
+### Optional
+
++ Install [vagrant-cachier][] for improved performance
+
+```
+$ vagrant plugin install vagrant-cachier
+```
+
+**Note**: I havent personally tested this as apt-cacher-ng is running for builds, howerver, for
+the provisioning itself it may be beneficial if you are doing a lot of provisioning. Make sure
+you read the __Vagrantfile__ and uncomment the section that enables the auto caching feature.
+
+## Usage
 
 ```
 $ vagrant up
 ```
 
-## create sbuild environments
+## Create sbuild environments
 
 ```
 $ vagrant mk-sbuild --series saucy
 ```
 
-## perform builds
+## Perform builds
 
 ```
 $ vagrant sbuild --project saucy-amd64 --dsc scratch/PACKAGE*.dsc
 ```
 
-## additional
+## Additional
 
 If packages are required that are not in the archive you may place them in
 the **repo** directory and they will be included in any future builds.
 
-### reference
+### Reference
 
 This vagrant project was modeled after [SbuildSimple][]. Please check there
 for additional information [[on]] local packages.
 
-## todo
+## Todo
 
 + setup vagrant multi-machine for each series
 + include a config.yaml file for setting your debian maintainer info.
-+ make use of lxc provider
 
 [SbuildSimple]: https://wiki.ubuntu.com/SimpleSbuild
 [vagrant]: http://downloads.vagrantup.com/
-[vagrant-vbguest]: https://github.com/dotless-de/vagrant-vbguest
+[vagrant-lxc]: https://github.com/fgrehm/vagrant-lxc
+[vagrant-cachier]: https://github.com/fgrehm/vagrant-cachier

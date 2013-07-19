@@ -17,9 +17,9 @@ class sbuild::install{
 
     file {
       '/etc/schroot/script-get-ddebs':
-      owner => 'vagrant',
-      group => 'vagrant',
-      mode => 644,
+      owner => 'root',
+      group => 'root',
+      mode => 744,
       content => template('sbuild/script-get-ddebs.erb'),
       require => Package["sbuild"],
     }
