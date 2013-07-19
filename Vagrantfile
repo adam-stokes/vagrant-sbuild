@@ -6,26 +6,59 @@
 path = File.expand_path(File.join(File.dirname(__FILE__), 'lib'))
 $LOAD_PATH << path
 
+BASE_URL          = 'https://dl.dropboxusercontent.com/u/9578000'
+LAST_RELEASE_DATE = '2013-07-19'
+
+def lxc_box_url(release_name)
+  file_name      = "lxc-#{release_name}-amd64-#{LAST_RELEASE_DATE}.box"
+  "#{BASE_URL}/#{file_name}"
+end
+
+BOXES = {
+  precise: {
+    lxc_url:  lxc_box_url('precise'),
+  },
+  quantal: {
+    lxc_url:  lxc_box_url('quantal'),
+  },
+  raring:  {
+    lxc_url:  lxc_box_url('raring'),
+  },
+  saucy: {
+    lxc_url: lxc_box_url('saucy'),
+  }
+}
+
+
 Vagrant.require_plugin('vagrant-cachier')
-#Vagrant.require_plugin('vagrant-lxc')
-#Vagrant.require_plugin('vagrant-sbuild')
+Vagrant.require_plugin('vagrant-lxc')
 Vagrant.require_plugin('vagrant-salt')
+#Vagrant.require_plugin('vagrant-sbuild')
 
 Vagrant.configure("2") do |config|
-  # If vagrant-cachier plugin is installed uncomment for performance improvements
+  config.cache.scope = :machine
   config.cache.auto_detect = true
-  config.vm.define :salt do |salt_config|
-    # Every Vagrant virtual environment requires a box to build off of.
-    # VirtualBox
-    salt_config.vm.box = "precise64"
-    salt_config.vm.box_url = "http://goo.gl/xZ19a"
-    salt_config.vm.network :forwarded_port, guest: 80, host: 8080
-    salt_config.ssh.timeout = 300
-    salt_config.ssh.max_tries = 300
-    salt_config.vm.synced_folder "salt/roots", "/srv/salt/"
-    salt_config.vm.provision :salt do |salt|
-      salt.minion_config = "salt/minion"
-      salt.run_highstate = true
+
+  config.vm.synced_folder "salt/roots", "/srv"
+
+  config.ssh.timeout = 300
+  config.ssh.max_tries = 300
+
+  BOXES.each do |box_name, box_config|
+    config.vm.define(box_name.to_sym) do |vm_config|
+      vm_config.vm.box = "#{box_name}64"
+      vm_config.vm.network :forwarded_port, guest: 80, host: 8080
+
+      vm_config.vm.provider :lxc do |lxc, lxc_config|
+        lxc_config.vm.box_url = box_config[:lxc_url]
+        lxc_config.vm.hostname = 'lxc-dev-salt'
+        lxc.customize 'aa_profile', 'unconfined'
+      end
+
+      vm_config.vm.provision :salt do |salt|
+        salt.minion_config = "salt/minion"
+        salt.run_highstate = true
+      end
     end
   end
 end
