@@ -15,10 +15,10 @@ Vagrant.configure("2") do |config|
   # If vagrant-cachier plugin is installed uncomment for performance improvements
   config.cache.auto_detect = true
 
-  # LXC
+  # Every Vagrant virtual environment requires a box to build off of.
+  # VirtualBox
   config.vm.box = "precise64"
-  config.vm.box_url = "http://files.vagrantup.com/precise64.box"
-  # config.vm.box_url = "http://goo.gl/qiItK"
+  config.vm.box_url = "http://goo.gl/xZ19a"
 
   # Networking
   # config.vm.network :hostonly, "192.168.33.10"
@@ -34,7 +34,4 @@ Vagrant.configure("2") do |config|
     salt.minion_config = "salt/minion"
     salt.run_highstate = true
   end
-
 end
-
-
