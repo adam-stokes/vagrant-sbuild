@@ -14,24 +14,18 @@ Vagrant.require_plugin('vagrant-salt')
 Vagrant.configure("2") do |config|
   # If vagrant-cachier plugin is installed uncomment for performance improvements
   config.cache.auto_detect = true
-
-  # Every Vagrant virtual environment requires a box to build off of.
-  # VirtualBox
-  config.vm.box = "precise64"
-  config.vm.box_url = "http://goo.gl/xZ19a"
-
-  # Networking
-  # config.vm.network :hostonly, "192.168.33.10"
-  # config.vm.network :bridged
-  # config.vm.network :forwarded_port, guest: 80, host: 8080
-
-  # Configure where you'd like successful sbuild packages to be
-  # config.vm.synced_folder "scratch", "/home/vagrant/ubuntu/scratch"
-  # config.vm.synced_folder "logs", "/home/vagrant/ubuntu/logs"
-  # config.vm.synced_folder "repo", "/home/vagrant/ubuntu/repo"
-  config.vm.synced_folder "salt/roots", "/srv/salt/"
-  config.vm.provision :salt do |salt|
-    salt.minion_config = "salt/minion"
-    salt.run_highstate = true
+  config.vm.define :salt do |salt_config|
+    # Every Vagrant virtual environment requires a box to build off of.
+    # VirtualBox
+    salt_config.vm.box = "precise64"
+    salt_config.vm.box_url = "http://goo.gl/xZ19a"
+    salt_config.vm.network :forwarded_port, guest: 80, host: 8080
+    salt_config.ssh.timeout = 300
+    salt_config.ssh.max_tries = 300
+    salt_config.vm.synced_folder "salt/roots", "/srv/salt/"
+    salt_config.vm.provision :salt do |salt|
+      salt.minion_config = "salt/minion"
+      salt.run_highstate = true
+    end
   end
 end
