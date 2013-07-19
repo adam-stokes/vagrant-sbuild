@@ -14,7 +14,7 @@ Vagrant.require_plugin('vagrant-sbuild')
 
 Vagrant.configure("2") do |config|
   # Set to true if you wish to have GuestAdditions updated for cloud image
-  config.vbguest.auto_update = false
+#  config.vbguest.auto_update = false
 
   # Every Vagrant virtual environment requires a box to build off of.
   # VirtualBox
