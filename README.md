@@ -12,10 +12,10 @@ spinup quick sbuild environments with additional support for custom apt reposito
 
 ## Setup
 
-+ Install virtualbox
++ Install lxc
 
 ```
-$ sudo apt-get install virtualbox
+$ sudo apt-get install lxc apt-cacher-ng
 ```
 
 + Install [vagrant][]
@@ -32,6 +32,12 @@ $ git submodule update
  
 ```
 $ vagrant plugin install vagrant-lxc
+```
+
++ Install [vagrant-salt][]
+
+```
+$ vagrant plugin install vagrant-salt
 ```
 
 + Set some environment variables
@@ -90,3 +96,4 @@ for additional information [[on]] local packages.
 [vagrant]: http://downloads.vagrantup.com/
 [vagrant-lxc]: https://github.com/fgrehm/vagrant-lxc
 [vagrant-cachier]: https://github.com/fgrehm/vagrant-cachier
+[vagrant-salt]: https://github.com/saltstack/salty-vagrant

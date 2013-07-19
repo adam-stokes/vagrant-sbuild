@@ -7,8 +7,8 @@ path = File.expand_path(File.join(File.dirname(__FILE__), 'lib'))
 $LOAD_PATH << path
 
 Vagrant.require_plugin('vagrant-cachier')
-Vagrant.require_plugin('vagrant-lxc')
-Vagrant.require_plugin('vagrant-sbuild')
+#Vagrant.require_plugin('vagrant-lxc')
+#Vagrant.require_plugin('vagrant-sbuild')
 Vagrant.require_plugin('vagrant-salt')
 
 Vagrant.configure("2") do |config|
@@ -16,8 +16,9 @@ Vagrant.configure("2") do |config|
   config.cache.auto_detect = true
 
   # LXC
-  config.vm.box = "lxcprecise64v3"
-  config.vm.box_url = "http://goo.gl/qiItK"
+  config.vm.box = "precise64"
+  config.vm.box_url = "http://files.vagrantup.com/precise64.box"
+  # config.vm.box_url = "http://goo.gl/qiItK"
 
   # Networking
   # config.vm.network :hostonly, "192.168.33.10"
