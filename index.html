@@ -69,17 +69,17 @@
 <ul>
 <li>Install <a href="http://downloads.vagrantup.com/">vagrant</a>
 </li>
-<li>Install <a href="https://github.com/dotless-de/vagrant-vbguest">vagrant-vbguest</a>
-</li>
-</ul><pre><code>$ vagrant plugin install vagrant-vbguest
-</code></pre>
-
-<ul>
 <li>Install vagrant-sbuild</li>
 </ul><pre><code>$ git clone git://github.com:battlemidget/vagrant-sbuild.git
 $ cd vagrant-sbuild
 $ git submodule init
 $ git submodule update
+</code></pre>
+
+<ul>
+<li>Install <a href="https://github.com/dotless-de/vagrant-vbguest">vagrant-vbguest</a>
+</li>
+</ul><pre><code>$ vagrant plugin install vagrant-vbguest
 </code></pre>
 
 <ul>
@@ -124,7 +124,7 @@ for additional information [[on]] local packages.</p>
 <ul>
 <li>setup vagrant multi-machine for each series</li>
 <li>include a config.yaml file for setting your debian maintainer info.</li>
-<li>extend vagrant commands to include mk-sbuild.</li>
+<li>make use of lxc provider</li>
 </ul>
       </section>
 
