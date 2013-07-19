@@ -20,10 +20,6 @@ Vagrant.configure("2") do |config|
   # VirtualBox
   config.vm.box = "precise64"
   config.vm.box_url = "http://goo.gl/xZ19a"
-  # LXC
-  # Disabled until https://github.com/fgrehm/vagrant-lxc/issues/113 is resolved
-  # config.vm.box = "lxcraring64"
-  # config.vm.box_url = "http://goo.gl/HMCKT"
 
   # config.vm.network :hostonly, "192.168.33.10"
   # config.vm.network :bridged
@@ -53,9 +49,6 @@ Vagrant.configure("2") do |config|
   config.vm.provider :virtualbox do |vb|
      vb.customize ["modifyvm", :id, "--cpus",
       `awk "/^processor/ {++n} END {print n}" /proc/cpuinfo 2> /dev/null || sh -c 'sysctl hw.logicalcpu 2> /dev/null || echo ": 2"' | awk \'{print \$2}\' `.chomp ]
-  end
-  config.vm.provider :lxc do |lxc|
-    lxc.customize 'cgroup.memory.limit_in_bytes', '1024'
   end
 end
 
