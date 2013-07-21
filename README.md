@@ -53,7 +53,7 @@ guest.
 ### reference
 
 This vagrant project was modeled after [SbuildSimple][]. Please check there
-for additional information [[on]] local packages.
+for additional information on local packages.
 
 ## todo
 
