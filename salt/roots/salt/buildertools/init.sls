@@ -1,9 +1,5 @@
 packages:
   pkg.installed:
     - names:
-        - build-essential
-        - ubuntu-dev-tools
-        - debhelper
-        - fakeroot
-        - bzr
-  
+        - apt-cacher-ng
+        - devscripts

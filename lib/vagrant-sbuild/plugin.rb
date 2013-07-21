@@ -12,11 +12,6 @@ module VagrantPlugins
         require_relative "command"
         CommandSbuild
       end
-
-      command("mk-sbuild") do
-        require_relative "command"
-        CommandMKSbuild
-      end
     end
   end
 end
