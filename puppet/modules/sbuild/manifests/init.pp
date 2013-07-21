@@ -16,6 +16,16 @@ class sbuild::install{
     }
 
     file {
+      '/etc/schroot/script-get-ddebs':
+      owner => 'vagrant',
+      group => 'vagrant',
+      mode => 644,
+      content => template('sbuild/script-get-ddebs.erb'),
+      require => Package["sbuild"],
+    }
+
+
+    file {
       '/home/vagrant/.sbuildrc':
       owner => 'vagrant',
       group => 'vagrant',

@@ -1,24 +1,23 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
+#
+# Enable guestadditions with: vagrant plugin install vagrant-vbguest
+# Enable lxc with: vagrant plugin install vagrant-lxc
+#
+# To CHANGE the golden image: sudo schroot -c precise-amd64-source -u root
+# To ENTER an image snapshot: schroot -c precise-amd64
+# To BUILD within a snapshot: sbuild -A -d precise-amd64 PACKAGE*.dsc
+path = File.expand_path(File.join(File.dirname(__FILE__), 'lib'))
+$LOAD_PATH << path
 
-# Addresses issue of ubuntu cloud images having older guestadditions
-# https://github.com/dotless-de/vagrant-vbguest/issues/64#issuecomment-17214061
-class CloudUbuntuVagrant < VagrantVbguest::Installers::Ubuntu
-  def install(opts=nil, &block)
-    communicate.sudo("apt-get -y -q purge virtualbox-guest-dkms virtualbox-guest-utils virtualbox-guest-x11", opts, &block)
-    @vb_uninstalled = true
-    super
-  end
-
-  def running?(opts=nil, &block)
-    return false if @vb_uninstalled
-    super
-  end
-end
+Vagrant.require_plugin('vagrant-sbuild')
 
 Vagrant.configure("2") do |config|
-  config.vbguest.installer = CloudUbuntuVagrant
+  # Set to true if you wish to have GuestAdditions updated for cloud image
+#  config.vbguest.auto_update = false
+
   # Every Vagrant virtual environment requires a box to build off of.
+  # VirtualBox
   config.vm.box = "precise64"
   config.vm.box_url = "http://goo.gl/xZ19a"
 
@@ -28,12 +27,17 @@ Vagrant.configure("2") do |config|
 
   # Experimental: (aka doesnt work yet)
   # Configure where you'd like successful sbuild packages to be
-  # config.vm.share_folder "builds", "/vagrant_builds", ENV['HOME']. "/builds"
+  config.vm.synced_folder "scratch", "/home/vagrant/ubuntu/scratch"
+  # Share logs and repo from host machine so you can easily get to the
+  # builds done on the vagrant box
+  config.vm.synced_folder "logs", "/home/vagrant/ubuntu/logs"
+  config.vm.synced_folder "repo", "/home/vagrant/ubuntu/repo"
 
   config.vm.provision :puppet do |puppet|
     puppet.manifests_path = "puppet/manifests"
     puppet.module_path = "puppet/modules"
     puppet.manifest_file  = "init.pp"
+    # Uncomment for extended information
     # puppet.options="--verbose --debug"
     puppet.facter = {
       "debemail" => ENV['DEBEMAIL'] || "Rod Piper <wwf@4life.com>",
@@ -47,3 +51,5 @@ Vagrant.configure("2") do |config|
       `awk "/^processor/ {++n} END {print n}" /proc/cpuinfo 2> /dev/null || sh -c 'sysctl hw.logicalcpu 2> /dev/null || echo ": 2"' | awk \'{print \$2}\' `.chomp ]
   end
 end
+
+

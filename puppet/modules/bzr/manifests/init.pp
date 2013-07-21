@@ -1,8 +1,6 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-include vcsrepo
-
 class bzr::install {
 
     file {
@@ -20,12 +18,5 @@ class bzr::install {
       mode => 644,
       content => template('bzr/bazaar.conf.erb'),
       require => File['/home/vagrant/.bazaar'],
-    }
-
-    vcsrepo { "/home/vagrant/ubuntu/repo":
-      ensure   => present,
-      provider => bzr,
-      source   => 'lp:~barry/+junk/repotools',
-      subscribe => [ Package["bzr"], File['/home/vagrant/ubuntu'] ],
     }
 }
