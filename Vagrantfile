@@ -7,7 +7,7 @@ path = File.expand_path(File.join(File.dirname(__FILE__), 'lib'))
 $LOAD_PATH << path
 
 BASE_URL          = 'https://dl.dropboxusercontent.com/u/9578000'
-LAST_RELEASE_DATE = '2013-07-19'
+LAST_RELEASE_DATE = '2013-07-20'
 
 def lxc_box_url(release_name)
   file_name      = "lxc-#{release_name}-amd64-#{LAST_RELEASE_DATE}.box"
@@ -33,7 +33,7 @@ BOXES = {
 Vagrant.require_plugin('vagrant-cachier')
 Vagrant.require_plugin('vagrant-lxc')
 Vagrant.require_plugin('vagrant-salt')
-#Vagrant.require_plugin('vagrant-sbuild')
+Vagrant.require_plugin('vagrant-sbuild')
 
 Vagrant.configure("2") do |config|
   config.cache.scope = :machine
@@ -51,8 +51,8 @@ Vagrant.configure("2") do |config|
 
       vm_config.vm.provider :lxc do |lxc, lxc_config|
         lxc_config.vm.box_url = box_config[:lxc_url]
-        lxc_config.vm.hostname = 'lxc-dev-salt'
-        lxc.customize 'aa_profile', 'unconfined'
+        lxc_config.vm.hostname = "#{box_name}-lxc-dev-salt"
+        lxc.customize "aa_profile", "unconfined"
       end
 
       vm_config.vm.provision :salt do |salt|

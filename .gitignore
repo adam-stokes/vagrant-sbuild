@@ -19,9 +19,3 @@ logs/*
 !logs/.gitkeep
 scratch/*
 !scratch/.gitkeep
-repo/*
-!repo/chup
-!repo/clean.sh
-!repo/prep.sh
-!repo/scan.sh
-!repo/sbuildrc.ex
