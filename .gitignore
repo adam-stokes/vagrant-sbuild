@@ -15,7 +15,7 @@ MYMETA.yml
 nytprof.out
 pm_to_blib
 .vagrant
-logs/*
-!logs/.gitkeep
-scratch/*
-!scratch/.gitkeep
+eg/logs/*
+!eg/logs/.gitkeep
+eg/scratch/*
+!eg/scratch/.gitkeep

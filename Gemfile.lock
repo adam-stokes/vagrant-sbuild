@@ -1,0 +1,52 @@
+GIT
+  remote: git://github.com/fgrehm/vagrant-lxc.git
+  revision: d2e354839f404ef426bdee38e50c9b3256e1e3c2
+  specs:
+    vagrant-lxc (0.4.1.dev)
+
+GIT
+  remote: git://github.com/fgrehm/vagrant-pristine.git
+  revision: 5c400d7850fc5f98d9601b59f4c3bd74818650de
+  specs:
+    vagrant-pristine (0.2.0)
+
+GIT
+  remote: git://github.com/mitchellh/vagrant.git
+  revision: 4b299c9fc22dfdb192993d4874670370b8e90122
+  specs:
+    vagrant (1.2.5.dev)
+      childprocess (~> 0.3.7)
+      erubis (~> 2.7.0)
+      i18n (~> 0.6.0)
+      log4r (~> 1.1.9)
+      net-scp (~> 1.1.0)
+      net-ssh (~> 2.6.6)
+
+PATH
+  remote: .
+  specs:
+    vagrant-sbuild (0.1.0.dev)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    childprocess (0.3.9)
+      ffi (~> 1.0, >= 1.0.11)
+    erubis (2.7.0)
+    ffi (1.9.0)
+    i18n (0.6.4)
+    log4r (1.1.10)
+    net-scp (1.1.2)
+      net-ssh (>= 2.6.5)
+    net-ssh (2.6.8)
+    rake (10.1.0)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  rake
+  vagrant!
+  vagrant-lxc!
+  vagrant-pristine!
+  vagrant-sbuild!
