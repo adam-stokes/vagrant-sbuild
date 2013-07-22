@@ -24,20 +24,18 @@ $ sudo apt-get install lxc apt-cacher-ng
 ```
 $ git clone git://github.com:battlemidget/vagrant-sbuild.git
 $ cd vagrant-sbuild
-$ git submodule init
-$ git submodule update
 ```
 
-+ Install [vagrant-lxc][]
++ Install [vundler][]
  
 ```
-$ vagrant plugin install vagrant-lxc
+$ vagrant plugin install vundler
 ```
 
-+ Install [vagrant-salt][]
++ Install vagrant bundle (for fetching plugin dependencies)
 
 ```
-$ vagrant plugin install vagrant-salt
+$ vagrant plugin bundle
 ```
 
 + Set some environment variables
@@ -47,35 +45,19 @@ export DEBEMAIL=Your Name <hi2u@mail.com>
 export DEBSIGN_KEY=123134
 ```
 
-### Optional
-
-+ Install [vagrant-cachier][] for improved performance
-
-```
-$ vagrant plugin install vagrant-cachier
-```
-
-**Note**: I havent personally tested this as apt-cacher-ng is running for builds, howerver, for
-the provisioning itself it may be beneficial if you are doing a lot of provisioning. Make sure
-you read the __Vagrantfile__ and uncomment the section that enables the auto caching feature.
-
 ## Usage
 
 ```
-$ vagrant up
-```
-
-## Create sbuild environments
-
-```
-$ vagrant mk-sbuild --series saucy
+$ vagrant up [saucy|raring|quantal|precise]
 ```
 
 ## Perform builds
 
 ```
-$ vagrant sbuild --project saucy-amd64 --dsc scratch/PACKAGE*.dsc
+$ vagrant sbuild [series] --dsc scratch/PACKAGE*.dsc
 ```
+
+Built packages will be in your **scratch** directory.
 
 ## Additional
 
@@ -85,7 +67,7 @@ the **repo** directory and they will be included in any future builds.
 ### Reference
 
 This vagrant project was modeled after [SbuildSimple][]. Please check there
-for additional information [[on]] local packages.
+for additional information on local packages.
 
 ## Todo
 
@@ -94,6 +76,4 @@ for additional information [[on]] local packages.
 
 [SbuildSimple]: https://wiki.ubuntu.com/SimpleSbuild
 [vagrant]: http://downloads.vagrantup.com/
-[vagrant-lxc]: https://github.com/fgrehm/vagrant-lxc
-[vagrant-cachier]: https://github.com/fgrehm/vagrant-cachier
-[vagrant-salt]: https://github.com/saltstack/salty-vagrant
+[vundler]: https://github.com/fgrehm/vundler

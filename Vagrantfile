@@ -1,10 +1,15 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 #
-# Enable lxc with: vagrant plugin install vagrant-lxc
-# Enable cachier with: vagrant plugin install vagrant-cachier
-path = File.expand_path(File.join(File.dirname(__FILE__), 'lib'))
-$LOAD_PATH << path
+
+begin
+  # For local libs, temporary until this plugin is matured.
+  path = File.expand_path(File.join(File.dirname(__FILE__), 'lib'))
+  $LOAD_PATH << path
+end
+begin
+  require 'vundler'
+rescue LoadError; end
 
 BASE_URL          = 'https://dl.dropboxusercontent.com/u/9578000'
 LAST_RELEASE_DATE = '2013-07-20'
@@ -28,12 +33,6 @@ BOXES = {
     lxc_url: lxc_box_url('saucy'),
   }
 }
-
-
-Vagrant.require_plugin('vagrant-cachier')
-Vagrant.require_plugin('vagrant-lxc')
-Vagrant.require_plugin('vagrant-salt')
-Vagrant.require_plugin('vagrant-sbuild')
 
 Vagrant.configure("2") do |config|
   config.cache.scope = :machine

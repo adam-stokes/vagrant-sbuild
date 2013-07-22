@@ -1,0 +1,6 @@
+[
+  "vagrant-lxc",
+  "vagrant-cachier",
+  "vagrant-salt",
+  "vagrant-sbuild"
+]
