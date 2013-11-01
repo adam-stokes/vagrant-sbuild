@@ -77,3 +77,7 @@ for additional information on local packages.
 [SbuildSimple]: https://wiki.ubuntu.com/SimpleSbuild
 [vagrant]: http://downloads.vagrantup.com/
 [vundler]: https://github.com/fgrehm/vundler
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/battlemidget/vagrant-sbuild/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
